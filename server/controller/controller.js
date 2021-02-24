@@ -16,44 +16,141 @@ const pool= new Pool({
 
 const appCtrl= {}
 
-appCtrl.registerUser= async (req, res)=>{
-    //console.log(req.body); 
+
+appCtrl.registerUser= async (req,res)=>{
    
-    try {
-        const {id,email,password}= req.body; 
+     const{id, name, email, password, password2}=req.body; 
+     const token=  wjt.sign({password:password},'secretkey');
 
-        const token=  wjt.sign({password:password},'secretkey'); 
-      
-        const hash = await bcrypt.hash(password, 10); 
+     console.log({
+         name,
+         email,
+         password,
+         password2
+     }); 
+     const errors=[]; 
 
-        await pool.query(`insert into loggin values  (${id},'${email}','${hash}')`); 
+    if(!name||!email||!password||!password2){
+        errors.push({message:'Todos los campos deben estar llenos'});
+    }
+
+    
+    if (/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email)){
+     console.log('correo valido')
+    } else {
+     errors.push({message:'Correo no valido'});
+    }
+
+    if(password.length<6){
+        errors.push({message:'El password debe tener al menos 6 caracteres'});
+    }
+
+    if (password!==password2) {
+         errors.push({message:'Los campos de password no coinciden'});
+    }
+
+    if(errors.length>0){
+        res.send({errors})
+    }else {
+        //las validaciones fueron superadas 
+        const hashPassword= await bcrypt.hash(password,10); 
+        console.log('password encriptado: ', hashPassword);  
+
+        const response = pool.query( `SELECT "id" FROM loggin WHERE "email"= '${email}'`, (err,results)=>{
+            if(err){                     
+                throw err
+            }
+            //console.log(results.rows[0].id); 
+            if(results.rows.length>0){
+                errors.push({message:'error: email ya registrado'}); 
+                res.send({errors})
+            }else{ 
+
+            const response= pool.query(`insert into loggin values  (${id},'${email}','${hashPassword}')`);
+           
+            res.status(200).json({token:token}); 
+            
+            console.log('token: ', token)
+
+            }
+
+        })
         
-        console.log(token)
-
-        await res.status(200).json({token:token}); 
-
-    } catch (e) { 
-        console.log(e); 
-        res.status(500).send('Algo salio mal') 
     }
 
 }; 
 
-appCtrl.loginUser= async (req,res)=>{
-    try {
-        const {email,password}= req.body;    
+appCtrl.loginUser= async (req, res)=>{
+    //console.log(req.body); 
+   const {email, password}= req.body; 
+   const hashPassword= await bcrypt.hash(password,10);
+   //console.log('El password ecriptado fue en el login',hashPassword)
+//+++++++++++++
 
-        const idUser=  pool.query(`SELECT 'id'  from loggin WHERE 'email'  = '${req.body.email}' `);
-        //console.log(idUser.rows)
-        
-      
+const token=  wjt.sign({password:password},'secretkey');
 
-    } catch (e) {
-        console.log(e); 
-        res.status(500).send('Algo salio mal') 
+const errors=[]; 
+
+if(!email||!password){
+   errors.push({message:'Todos los campos deben estar llenos'});
+}
+
+const response =  pool.query( `SELECT "email"  FROM loggin WHERE "email"= '${email}'`, (err,results)=>{
+    if(err){                    
+        throw err
     }
+    const consulta=results.rows[0].email;  
+    console.log(consulta); 
      
+    if(consulta<0){
+      
+       res.status(200).send('el correo no procede')
+    }else{ 
+        res.status(200).send('el correo   existe')
+     
+    }
+})
+
+if (/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email)){
+console.log('correo valido')
+} else {
+errors.push({message:'Correo no valido'});
+}
+
+if(password.length<6){
+   errors.push({message:'El password debe tener al menos 6 caracteres'});
+}
+
+if(errors.length>0){
+   res.send({errors})
+}else {
+
+    const response = await pool.query( `SELECT "password"  FROM loggin WHERE "email"= '${email}'`, (err,results)=>{
+        if(err){                    
+            throw err
+        }
+        const consulta=results.rows[0].password;  
+        console.log(consulta); 
+         
+        if(bcrypt.compareSync(password, consulta)){
+           const user= email
+           //console.log('Correo y contaceña correctos'); 
+           res.status(200).send('Clave valida, acceso permitido')
+        }else{ 
+    
+         return res.status(401).send('Correo o contaceña invalidos'); 
+        }
+    })
+    
+}
+       
+
+//+++++++++++++
+
+   
+
 }; 
+
 
 appCtrl.getUser= async (req, res)=>{
 

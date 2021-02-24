@@ -3,9 +3,9 @@ POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-    "id":"54",
-    "email":"cambiosdeforma@hotmail.com", 
-    "password":"11111000000"
+    "id":"55",
+    "email":"lauren@hotmail.com", 
+    "password":"0011"
 }
 
 ###
@@ -19,3 +19,8 @@ Content-Type: application/json
     
 }
 
+###
+POST http://localhost:3000/api/register 
+
+
+content
