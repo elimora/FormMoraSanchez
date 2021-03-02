@@ -1,0 +1,52 @@
+
+<ion-content>
+  <div class="heading">
+    <h1 >Signup</h1>
+    <p>Please signup enter into  App.</p>
+  </div>
+  <div class="social-login">
+    <p>Enter via social network</p>
+    <div class="links">
+      <ion-button class="twitter" routerLink="/thank-you">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-button>
+      <ion-button class="facebook" routerLink="/thank-you">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <div class="email-login">
+    <p>Or Signup with email</p>
+
+    <form (submit)="signUp()">
+      <div class="formfield">
+        <input type="text" [(ngModel)]="user.email"  name="email" id="email" >
+      <label for="email" placeholder="Email">Email</label>
+      </div>
+
+      <div class="formfield" >
+        <input type="password" [(ngModel)]="user.password"  name="password" id="password" >
+        <label for="password" placeholder="Password">Password</label>
+      </div>
+
+      <div class="other-links">
+        <div class="remember-me">
+          <ion-checkbox></ion-checkbox>
+          <p>I'm agree with privacity policy</p>
+        </div>
+      </div>
+
+      <div class="login-button">
+        <ion-button type="submit"  class="login" routerLink="/thank-you">Login</ion-button>
+        <p>Already have an acount? <span routerLink="/login">Login</span></p>
+      </div>
+      
+
+    </form>
+    
+  
+  </div>
+
+</ion-content>
+
