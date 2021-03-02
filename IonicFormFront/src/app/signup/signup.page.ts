@@ -1,6 +1,7 @@
 import { templateJitUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../app/services/auth.service";
+import { Router } from "@angular/router";
 
 
 
@@ -15,7 +16,7 @@ export class SignupPage implements OnInit {
 
   user={
 
-    id:83,
+    id:85,
     name:'',
     email:'',
     password:'',
@@ -23,7 +24,7 @@ export class SignupPage implements OnInit {
 
   }
 
-  constructor(private authServise:AuthService) { }
+  constructor(private authServise:AuthService,private router:Router) { }
 
   ngOnInit() {
   }
@@ -34,7 +35,9 @@ export class SignupPage implements OnInit {
       res=>{
         console.log(res),
         //local recibe nombre y valor
-        localStorage.setItem('token',res.token)
+        localStorage.setItem('token',res.token),
+        this.router.navigate(['/private-form'])
+
       },
       err=>console.log(err)
     )
