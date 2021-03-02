@@ -1,5 +1,8 @@
 import { templateJitUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from "../../app/services/auth.service";
+
+
 
 @Component({
   selector: 'app-signup',
@@ -14,12 +17,18 @@ export class SignupPage implements OnInit {
 
   }
 
-  constructor() { }
+  constructor(private authServise:AuthService) { }
 
   ngOnInit() {
   }
 
   signUp(){
-    console.log(this.user)
+    this.authServise.signUp(this.user)
+    .subscribe(
+      res=>{
+        console.log(res)
+      },
+      err=>console.log(err)
+    )
   }
 }

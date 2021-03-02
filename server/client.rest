@@ -3,9 +3,11 @@ POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-    "id":"55",
-    "email":"lauren@hotmail.com", 
-    "password":"0011"
+    "id":"80",
+    "name":"lau",
+    "email":"laurenpaola@hotmail.com", 
+    "password":"123456",
+    "password2":"123456"
 }
 
 ###
