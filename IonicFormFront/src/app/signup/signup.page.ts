@@ -9,11 +9,17 @@ import { AuthService } from "../../app/services/auth.service";
   templateUrl: './signup.page.html',
   styleUrls: ['../login/login.page.scss'],
 })
+
+
 export class SignupPage implements OnInit {
 
   user={
+
+    id:83,
+    name:'',
     email:'',
-    password:''
+    password:'',
+    password2:''
 
   }
 
@@ -26,7 +32,9 @@ export class SignupPage implements OnInit {
     this.authServise.signUp(this.user)
     .subscribe(
       res=>{
-        console.log(res)
+        console.log(res),
+        //local recibe nombre y valor
+        localStorage.setItem('token',res.token)
       },
       err=>console.log(err)
     )

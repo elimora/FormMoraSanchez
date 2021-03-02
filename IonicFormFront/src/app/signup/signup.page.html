@@ -20,6 +20,12 @@
     <p>Or Signup with email</p>
 
     <form (submit)="signUp()">
+
+      <div class="formfield">
+        <input type="text" [(ngModel)]="user.name"  name="name" id="name" >
+      <label for="name" placeholder="Name">Name</label>
+      </div>
+
       <div class="formfield">
         <input type="text" [(ngModel)]="user.email"  name="email" id="email" >
       <label for="email" placeholder="Email">Email</label>
@@ -28,6 +34,11 @@
       <div class="formfield" >
         <input type="password" [(ngModel)]="user.password"  name="password" id="password" >
         <label for="password" placeholder="Password">Password</label>
+      </div>
+
+      <div class="formfield" >
+        <input type="password" [(ngModel)]="user.password2"  name="password2" id="password2" >
+        <label for="password2" placeholder="Password">Confirm Passwort</label>
       </div>
 
       <div class="other-links">
@@ -41,11 +52,11 @@
         <ion-button type="submit"  class="login" routerLink="/thank-you">Login</ion-button>
         <p>Already have an acount? <span routerLink="/login">Login</span></p>
       </div>
-      
+
 
     </form>
-    
-  
+
+
   </div>
 
 </ion-content>
