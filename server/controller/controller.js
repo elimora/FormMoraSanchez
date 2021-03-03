@@ -1,21 +1,8 @@
-const {Pool}=require('pg'); 
+const pool = require("../models/database")
 const wjt= require('jsonwebtoken'); 
 const bcrypt= require('bcrypt'); 
 
-
-
-
-const pool= new Pool({
-    host:'localhost',
-    user :'postgres', 
-    password:'elimora', 
-    database:'PruebasVarias', 
-    port:'5433'
-
-}); 
-
 const appCtrl= {}
-
 
 appCtrl.registerUser= async (req,res)=>{
    
