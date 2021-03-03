@@ -10,6 +10,20 @@ Content-Type: application/json
     "password2":"123456"
 }
 
+
+###
+POST https://formmorasanchez.herokuapp.com/api/register 
+Content-Type: application/json
+
+{
+    "id":"85",
+    "name":"lau",
+    "email":"laurenp@hotmail.com", 
+    "password":"123456",
+    "password2":"123456"
+}
+
+
 ###
 POST http://localhost:3000/api/login
 Content-Type: application/json
