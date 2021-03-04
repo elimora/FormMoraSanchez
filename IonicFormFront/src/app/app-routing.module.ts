@@ -27,7 +27,11 @@ const routes: Routes = [
   {
     path: 'private-form',
     loadChildren: () => import('./private-form/private-form.module').then( m => m.PrivateFormPageModule)
+  },  {
+    path: 'createmenu',
+    loadChildren: () => import('./createmenu/createmenu.module').then( m => m.CreatemenuPageModule)
   },
+
 ];
 
 @NgModule({

@@ -22,23 +22,23 @@ router.get('/profile',verifyToken, (req, res)=>{
 
 router.post('/create/user',userCtrl.createUser);
 router.get('/user',userCtrl.getUser);
-router.put('update/user',userCtrl.updateUser);
+router.put('/update/user',userCtrl.updateUser);
 router.delete('/delete/user',userCtrl.deleteUser);
 
-router.post('create/form',formCtrl.createForm);
+router.post('/create/form',formCtrl.createForm);
 router.get('/form',formCtrl.getFormByName);
-router.get('list/form',formCtrl.getAllForms);
-router.put('update/form',formCtrl.changeFormName);
-router.put('form/asign',formCtrl.changeFormSub);
+router.get('/list/form',formCtrl.getAllForms);
+router.put('/update/form',formCtrl.changeFormName);
+router.put('/form/asign',formCtrl.changeFormSub);
 router.delete('/delete/form',formCtrl.deleteForm);
 
-router.post('create/item',itemCtrl.createItem);
+router.post('/create/item',itemCtrl.createItem);
 router.get('/list/item',itemCtrl.getAllItems);
 router.get('/item/form',itemCtrl.getItemByForm);
 router.get('/item/style',itemCtrl.getItemByStyle);
-router.put('/update/item,',itemCtrl.updateItem);
-router.put('update/style',itemCtrl.updateStyle);
-router.delete('delete/item',itemCtrl.deleteItem);
+router.put('/update/item',itemCtrl.updateItem);
+router.put('/update/style',itemCtrl.updateStyle);
+router.delete('/delete/item',itemCtrl.deleteItem);
 
 router.post('/create/menu',menuCtrl.createMenu);
 router.post('/create/sub',menuCtrl.createSub);
@@ -48,7 +48,7 @@ router.get('/sub/menu',menuCtrl.getSubByMenu);
 router.put('/update/menu',menuCtrl.changeMenuName);
 router.put('/update/sub',menuCtrl.updateSub);
 router.delete('/delete/menu',menuCtrl.deleteMenu);
-router.delete('delete/sub',menuCtrl.deleteSub);
+router.delete('/delete/sub',menuCtrl.deleteSub);
 
 router.post('/innit/rol',rolCtrl.createRoles);
 
