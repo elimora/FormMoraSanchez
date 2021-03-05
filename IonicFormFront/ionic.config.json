@@ -1,5 +1,8 @@
 {
   "name": "IonicFormFront",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular"
 }

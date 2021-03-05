@@ -28,7 +28,7 @@ exports.createSub = async (req,res) => {
 
 exports.getMenus = async (req,res) => {
     try{
-        const result = await pool.query(`SELECT * FROM menu`);
+        const result = await pool.query(`SELECT * FROM menu INNER JOIN subnivel USING(id_menu)`);
         return res.json(result.rows);
     }
     catch(error){

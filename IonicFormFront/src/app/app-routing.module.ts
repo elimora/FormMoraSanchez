@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'createmenu',
     loadChildren: () => import('./createmenu/createmenu.module').then( m => m.CreatemenuPageModule)
   },
+  {
+    path: 'homeuser',
+    loadChildren: () => import('./homeuser/homeuser.module').then( m => m.HomeuserPageModule)
+  },
 
 ];
 
