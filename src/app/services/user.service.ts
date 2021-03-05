@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class UserService {
 
-  private URL = 'http://localhost:3000/api'
+  private URL = 'https://form-back-mora-sanchez.herokuapp.com/api'
   constructor(private http:HttpClient) { }
 
   createUser(user){
